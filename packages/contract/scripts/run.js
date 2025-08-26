@@ -1,19 +1,19 @@
 const main = async () => {
   const domainContractFactory = await hre.ethers.getContractFactory("Domains");
   // 'ninja'をデプロイ時にconstructorに渡します。
-  const domainContract = await domainContractFactory.deploy("ninja");
+  const domainContract = await domainContractFactory.deploy("jin");
   await domainContract.deployed();
 
   console.log("Contract deployed to:", domainContract.address);
 
   // valueで代金をやりとりしています。
-  let txn = await domainContract.register("mortal", {
+  let txn = await domainContract.register("hoge", {
     value: hre.ethers.utils.parseEther("0.01"),
   });
   await txn.wait();
 
-  const address = await domainContract.getAddress("mortal");
-  console.log("Owner of domain mortal:", address);
+  const address = await domainContract.getAddress("hoge");
+  console.log("Owner of domain hoge:", address);
 
   const balance = await hre.ethers.provider.getBalance(domainContract.address);
   console.log("Contract balance:", hre.ethers.utils.formatEther(balance));
